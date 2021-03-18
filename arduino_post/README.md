@@ -4,11 +4,11 @@ This example allows to send variables from the Arduino MKR1000 (WiFi101 library)
 
 ## Requirements
 _Hardware:_
-- Arduino MKR1000
+- [Arduino MKR1000](https://store.arduino.cc/usa/arduino-mkr1000)
 
 _Software:_
-- WiFi101 library
-- ArduinoJson library
+- [WiFi101 library](https://www.arduino.cc/reference/en/libraries/wifi101/)
+- [ArduinoJson library](https://arduinojson.org/)
 
 
 ## Setup
