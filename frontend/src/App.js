@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
 import "./App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Spinner from 'react-bootstrap/Spinner'
 
 import logo from "./logo.svg";
 import { backendHost, refreshInterval } from "./config/Constants";
@@ -32,7 +32,9 @@ export default class App extends Component {
   loadData = () => {
     this.getData(backendHost.data).then((response) => {
       // console.log("[App] data:", response);
-      this.setState({ data: response });
+      if (response && response.length > 0) {
+        this.setState({ data: response });
+      }
     });
   };
 
@@ -59,6 +61,23 @@ export default class App extends Component {
     return backendPromise;
   };
 
+  _renderData = (data) => {
+    if (data.length > 0) {
+      return (
+        <>
+          <Col>
+            <Sensors data={this.state.data} />
+          </Col>
+          <Col>
+            <HistoryPlot data={this.state.data} />
+          </Col>
+        </>
+      );
+    } else {
+      return <Spinner animation="border" />;
+    }
+  };
+
   render() {
     return (
       <>
@@ -75,13 +94,8 @@ export default class App extends Component {
           </Navbar.Brand>
         </Navbar>
         <Container>
-          <Row className="mt-5 text-center">
-            <Col>
-              <Sensors data={this.state.data} />
-            </Col>
-            <Col>
-              <HistoryPlot data={this.state.data} />
-            </Col>
+          <Row className="mt-5 text-center justify-content-md-center">
+            {this._renderData(this.state.data)}
           </Row>
         </Container>
       </>
