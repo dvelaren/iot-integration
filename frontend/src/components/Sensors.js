@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { varColors } from "../config/Constants";
+
 import Sensor from "./Sensor";
 
 import Table from "react-bootstrap/Table";
@@ -26,10 +28,10 @@ export default class Sensors extends Component {
           <tr>
             <th>Timestamp</th>
             <th>
-              Temperature <FontAwesomeIcon icon={faThermometerQuarter} />
+              Temperature <FontAwesomeIcon icon={faThermometerQuarter} style={{color: varColors.temperature}} />
             </th>
             <th>
-              Humidity <FontAwesomeIcon icon={faTint} />
+              Humidity <FontAwesomeIcon icon={faTint} style={{color: varColors.humidity}} />
             </th>
           </tr>
         </thead>
