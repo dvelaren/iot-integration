@@ -14,7 +14,7 @@ export default class HistoryPlot extends Component {
       });
     };
 
-    const traceTemp = (data) => {
+    const traceVars = (data) => {
       // console.log('[HistoryPlot] timestamp:', unpack(data, "timestamp"), 'temperature', unpack(data, "temperature"))
       return [
         {
@@ -26,6 +26,16 @@ export default class HistoryPlot extends Component {
           x: unpack(data, "timestamp"),
           y: unpack(data, "temperature"),
           line: { color: "#17BECF" },
+        },
+        {
+          type: "scatter",
+          mode: "lines",
+          name: "Humidity (%)",
+          // x: ['2013-10-04 22:23:00', '2013-11-04 22:23:00', '2013-12-04 22:23:00'],
+          // y: [1, 3, 6],
+          x: unpack(data, "timestamp"),
+          y: unpack(data, "humidity"),
+          line: { color: "#F50057" },
         },
       ];
     };
@@ -42,6 +52,10 @@ export default class HistoryPlot extends Component {
         range: [0, 100],
         type: "linear",
       },
+      legend: {
+        y: 1,
+        orientation: "h"
+      }
       // showlegend: true
     };
 
@@ -50,7 +64,7 @@ export default class HistoryPlot extends Component {
         return (
           <Card>
             <Card.Body>
-              <Plot data={traceTemp(this.props.data)} layout={layout} />
+              <Plot data={traceVars(this.props.data)} layout={layout} />
             </Card.Body>
           </Card>
         );
